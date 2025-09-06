@@ -1,4 +1,4 @@
-name: Deploy Azure Function
+name: Deploy SendReminders Function
 
 on:
   push:
@@ -8,8 +8,18 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # Checkout code
       - uses: actions/checkout@v3
+
+      # Install dependencies (optional, for validation/testing)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # Deploy to Azure Function App using ZipDeploy
       - name: Deploy to Azure Function
         uses: azure/webapps-deploy@v2
         with:
